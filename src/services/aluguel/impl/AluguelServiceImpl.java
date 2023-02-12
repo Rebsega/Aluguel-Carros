@@ -5,6 +5,8 @@ import entities.aluguel.Aluguel;
 import repository.aluguel.AluguelRepository;
 import services.aluguel.AluguelService;
 
+import java.util.List;
+
 public class AluguelServiceImpl implements AluguelService {
 
     private final AluguelRepository aluguelRepository;
@@ -20,5 +22,10 @@ public class AluguelServiceImpl implements AluguelService {
     @Override
     public Aluguel buscarPorId(String id) {
         return aluguelRepository.buscarPorId(id);
+    }
+
+    @Override
+    public List<Aluguel> buscarTodos() {
+        return aluguelRepository.buscarTodos();
     }
 }

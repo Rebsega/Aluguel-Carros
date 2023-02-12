@@ -1,25 +1,28 @@
 package entities.cliente;
 
-import entities.EntidadeGenerica;
+import dtos.aluguel.IncluirAluguelDTO;
+import dtos.cliente.IncluirClienteDTO;
 import enums.TipoPessoa;
 
-public class Cliente implements EntidadeGenerica {
+public class Cliente{
 
     private String nome;
 
-    private String identificador;
+    private String id;
 
     private TipoPessoa tipoPessoa;
 
-    public Cliente(String nome, String identificador, TipoPessoa tipoPessoa) {
+    public Cliente(String nome, String identificador) {
         this.nome = nome;
-        this.identificador = identificador;
-        this.tipoPessoa = tipoPessoa;
+        this.id = identificador;
+        validaIdentificador(identificador);
     }
 
-    @Override
+    public Cliente(IncluirClienteDTO incluirClienteDTO) {
+    }
+
     public String getId() {
-        return nome;
+        return id;
     }
 
     public String getNome() {
@@ -30,14 +33,8 @@ public class Cliente implements EntidadeGenerica {
         this.nome = nome;
     }
 
-    public String getIdentificador() {
-        return identificador;
-    }
 
-    public void setIdentificador(String identificador) {
-        this.identificador = identificador;
-        validaIdentificador(identificador);
-    }
+    public void setId(String id) { this.id = id; }
 
     private void validaIdentificador(String identificador) {
         if(identificador.length() == 11)

@@ -1,23 +1,43 @@
 package entities.aluguel;
 
-import entities.EntidadeGenerica;
+import dtos.aluguel.IncluirAluguelDTO;
 import entities.cliente.Cliente;
 import entities.veiculo.Veiculo;
 
 import java.util.Date;
 
-public class Aluguel implements EntidadeGenerica {
+public class Aluguel {
     private Cliente cliente;
     private Veiculo veiculo;
-    private String identificador;
+    private String id;
     private Date dataAluguel;
     private Date dataDevolucao;
 
-    public Aluguel(Cliente cliente, Veiculo veiculo, Date dataAluguel, Date dataDevolucao) {
+    public Aluguel(IncluirAluguelDTO incluirAluguelDTO) {
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
-        this.dataAluguel = dataAluguel;
-        this.dataDevolucao = dataDevolucao;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Date getDataAluguel() {
@@ -34,10 +54,5 @@ public class Aluguel implements EntidadeGenerica {
 
     public void setDataDevolucao(Date dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
-    }
-
-    @Override
-    public String getId() {
-        return identificador;
     }
 }

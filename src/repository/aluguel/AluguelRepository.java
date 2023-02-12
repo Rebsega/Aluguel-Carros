@@ -15,5 +15,5 @@ public interface AluguelRepository{
 
     List<Aluguel> buscarTodos();
 
-    boolean deletar(String id);
+    boolean veiculoEmUso(String idVeiculo);
 }
