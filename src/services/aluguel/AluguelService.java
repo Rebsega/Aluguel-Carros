@@ -12,5 +12,9 @@ public interface AluguelService {
 
     Optional<Aluguel> buscarPorId(String id);
 
+    Optional<Aluguel> buscarPorIdAluguelCpfCnpjClientePlacaVeiculo(String idAluguel, String cpfCnpjCliente, String placaVeiculo);
+
+    boolean devolucao(String idAluguel, String cpfCnpjCliente, String placaVeiculo);
+
     List<Aluguel> buscarTodos();
 }

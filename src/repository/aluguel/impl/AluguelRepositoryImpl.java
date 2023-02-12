@@ -5,10 +5,7 @@ import entities.aluguel.Aluguel;
 import exceptions.VeiculoEmUsoException;
 import repository.aluguel.AluguelRepository;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class AluguelRepositoryImpl implements AluguelRepository {
 
@@ -20,6 +17,7 @@ public class AluguelRepositoryImpl implements AluguelRepository {
     @Override
     public void salvar(IncluirAluguelDTO incluirAluguelDTO) {
         Aluguel aluguel = new Aluguel(incluirAluguelDTO);
+        aluguel.setAtivo(true);
         alugueisList.add(aluguel);
     }
 
@@ -31,6 +29,29 @@ public class AluguelRepositoryImpl implements AluguelRepository {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public Optional<Aluguel> buscarPorIdAluguelCpfCnpjClientePlacaVeiculo(String idAluguel, String cpfCnpjCliente, String placaVeiculo) {
+        for(Aluguel aluguel : alugueisList) {
+            if(aluguel.getId().equals(idAluguel) && aluguel.getCliente().getCpfCnpj().equals(cpfCnpjCliente) && aluguel.getVeiculo().getPlaca().equals(placaVeiculo)) {
+                return Optional.of(aluguel);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean devolucaoVeiculo(String idAluguel, String cpfCnpjCliente, String placaVeiculo) {
+        Calendar dataFinal = Calendar.getInstance();
+        for(Aluguel aluguel : alugueisList) {
+            if(aluguel.getId().equals(idAluguel) && aluguel.getCliente().getCpfCnpj().equals(cpfCnpjCliente) && aluguel.getVeiculo().getPlaca().equals(placaVeiculo)) {
+                aluguel.setDataDevolucao(dataFinal);
+                aluguel.setAtivo(false);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -51,7 +51,8 @@ public class MenuAluguel  {
             System.out.println("1 - Incluir");
             System.out.println("2 - Listar");
             System.out.println("3 - Buscar por ID");
-            System.out.println("4 - Voltar");
+            System.out.println("4 - Devolver veículo");
+            System.out.println("5 - Voltar");
             System.out.println(SEPARADOR);
             escolha = scanner.nextInt();
             scanner.nextLine();
@@ -59,7 +60,8 @@ public class MenuAluguel  {
                 case 1 -> this.incluirAluguel();
                 case 2 -> this.listarAlugueis();
                 case 3 -> this.buscarAluguelPorId();
-                case 4 -> new MenuPrincipal();
+                case 4 -> this.devolverVeiculo();
+                case 5 -> new MenuPrincipal();
                 default -> {
                     System.out.println("Opção inválida");
                     this.exibeMenuAluguel();
@@ -206,6 +208,35 @@ public class MenuAluguel  {
         Aluguel aluguel = aluguelService.buscarPorId(id)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Aluguel", id));
         System.out.println(aluguel.getId() + " - " + aluguel.getCliente().getNome() + " - " + aluguel.getVeiculo().getPlaca());
+    }
+
+    private void devolverVeiculo() {
+        System.out.println("Devolver Veículo");
+        System.out.println("ID do aluguel: ");
+        String idAluguel = scanner.nextLine();
+        System.out.println("CPF/CNPJ do cliente: ");
+        String cpfCnpj = scanner.nextLine();
+        while(!validaCepCnpj(cpfCnpj)) {
+            System.out.println("CPF/CNPJ inválido");
+            System.out.println("Redigite: ");
+            cpfCnpj = scanner.nextLine();
+        }
+        String finalCpfCnpj = cpfCnpj;
+        Cliente cliente = clienteService.buscarPorCpfCnpj(cpfCnpj)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Cliente", finalCpfCnpj));
+        System.out.println("Placa do veículo: ");
+        String placa = scanner.nextLine();
+        while(!validaPlaca(placa)) {
+            System.out.println("Placa inválida");
+            System.out.println("Redigite: ");
+            placa = scanner.nextLine();
+        }
+        String finalPlaca = placa;
+        Aluguel aluguel = aluguelService.buscarPorIdAluguelCpfCnpjClientePlacaVeiculo(idAluguel, cliente.getCpfCnpj(), finalPlaca)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Aluguel", idAluguel));
+        aluguel.getVeiculo().setEmUso(false);
+        aluguelService.devolucao(idAluguel, cliente.getCpfCnpj(), finalPlaca);
+        System.out.println("Veículo devolvido com sucesso");
     }
 
 }

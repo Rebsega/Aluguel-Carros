@@ -14,6 +14,7 @@ public class Aluguel {
     private Calendar dataAluguel;
     private Calendar dataDevolucao;
     private double valor;
+    private boolean ativo;
 
 
     public Aluguel(IncluirAluguelDTO incluirAluguelDTO) {
@@ -30,6 +31,14 @@ public class Aluguel {
         this.id = id;
         this.dataAluguel = dataAluguel;
         this.dataDevolucao = dataDevolucao;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public double getValor() {

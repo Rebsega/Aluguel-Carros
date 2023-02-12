@@ -26,6 +26,16 @@ public class AluguelServiceImpl implements AluguelService {
     }
 
     @Override
+    public Optional<Aluguel> buscarPorIdAluguelCpfCnpjClientePlacaVeiculo(String idAluguel, String cpfCnpjCliente, String placaVeiculo) {
+        return aluguelRepository.buscarPorIdAluguelCpfCnpjClientePlacaVeiculo(idAluguel, cpfCnpjCliente, placaVeiculo);
+    }
+
+    @Override
+    public boolean devolucao(String idAluguel, String cpfCnpjCliente, String placaVeiculo) {
+        return aluguelRepository.devolucaoVeiculo(idAluguel, cpfCnpjCliente, placaVeiculo);
+    }
+
+    @Override
     public List<Aluguel> buscarTodos() {
         return aluguelRepository.buscarTodos();
     }
