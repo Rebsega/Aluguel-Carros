@@ -1,28 +1,35 @@
 package services.cliente.impl;
 
-import dtos.cliente.IncluirClienteDTO;
+import dtos.cliente.IncluirAlterarClienteDTO;
 import entities.cliente.Cliente;
 import repository.cliente.ClienteRepository;
+import repository.cliente.impl.ClienteRepositoryImpl;
 import services.cliente.ClienteService;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ClienteServiceImpl implements ClienteService {
 
-    private final ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository = new ClienteRepositoryImpl();
 
     public ClienteServiceImpl(ClienteRepository clienteRepository) {
-        this.clienteRepository = clienteRepository;
+
     }
 
     @Override
-    public void incluir(IncluirClienteDTO incluirClienteDTO) {
-        clienteRepository.salvar(incluirClienteDTO);
+    public void incluir(IncluirAlterarClienteDTO incluirAlterarClienteDTO) {
+        clienteRepository.salvar(incluirAlterarClienteDTO);
     }
 
     @Override
-    public Cliente buscarPorId(String id) {
-        return null;
+    public Cliente alterar(IncluirAlterarClienteDTO incluirAlterarClienteDTO, String idAnterior) {
+        return clienteRepository.alterar(incluirAlterarClienteDTO, idAnterior);
+    }
+
+    @Override
+    public Optional<Cliente> buscarPorCpfCnpj(String id) {
+        return clienteRepository.buscarPorCpfCnpj(id);
     }
 
     @Override

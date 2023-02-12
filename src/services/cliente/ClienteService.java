@@ -1,17 +1,18 @@
 package services.cliente;
 
-import dtos.aluguel.IncluirAluguelDTO;
-import dtos.cliente.IncluirClienteDTO;
-import entities.aluguel.Aluguel;
+import dtos.cliente.IncluirAlterarClienteDTO;
 import entities.cliente.Cliente;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClienteService {
 
-    void incluir(IncluirClienteDTO incluirClienteDTO);
+    void incluir(IncluirAlterarClienteDTO incluirAlterarClienteDTO);
 
-    Cliente buscarPorId(String id);
+    Cliente alterar(IncluirAlterarClienteDTO incluirAlterarClienteDTO, String idAnterior);
+
+    Optional<Cliente> buscarPorCpfCnpj(String id);
 
     List<Cliente> buscarTodos();
 

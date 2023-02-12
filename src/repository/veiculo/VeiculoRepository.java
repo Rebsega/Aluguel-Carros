@@ -1,14 +1,16 @@
 package repository.veiculo;
 
-import dtos.veiculo.IncluirVeiculoDTO;
+import dtos.veiculo.IncluirAlterarVeiculoDTO;
 import entities.veiculo.Veiculo;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface VeiculoRepository {
-    void salvar(IncluirVeiculoDTO incluirVeiculoDTO);
+    void salvar(IncluirAlterarVeiculoDTO incluirAlterarVeiculoDTO);
+    Veiculo alterar(IncluirAlterarVeiculoDTO incluirAlterarVeiculoDTO, String placaAnterior);
 
-    Veiculo buscarPorId(String id);
+    Optional<Veiculo> buscarPorPlaca(String id);
 
     List<Veiculo> buscarTodos();
 

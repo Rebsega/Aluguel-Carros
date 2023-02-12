@@ -8,10 +8,11 @@ import repository.aluguel.AluguelRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class AluguelRepositoryImpl implements AluguelRepository {
 
-    private List<Aluguel> alugueisList;
+    private static List<Aluguel> alugueisList = new ArrayList<>();
 
     public AluguelRepositoryImpl(){ }
 
@@ -23,25 +24,26 @@ public class AluguelRepositoryImpl implements AluguelRepository {
     }
 
     @Override
-    public Aluguel buscarPorId(String id) {
-        return null;
-    }
-
-    @Override
-    public List buscarPorCliente(String idCliente) {
-        return null;
+    public Optional<Aluguel> buscarPorId(String id) {
+        for(Aluguel aluguel : alugueisList) {
+            if(aluguel.getId().equals(id)) {
+                return Optional.of(aluguel);
+            }
+        }
+        return Optional.empty();
     }
 
     @Override
     public List buscarTodos() {
-      return null;
+      return alugueisList;
     }
 
     @Override
     public boolean veiculoEmUso(String id) {
+        if(alugueisList.size() == 0) return false;
         for(Aluguel aluguel : alugueisList) {
-            if(aluguel.getVeiculo().getId().equals(id) && aluguel.getDataDevolucao().before(new Date())) {
-                throw new VeiculoEmUsoException(aluguel.getVeiculo().getId(), aluguel.getVeiculo().getPorte().toString());
+            if(aluguel.getVeiculo().getPlaca().equals(id) && aluguel.getDataDevolucao().before(new Date())) {
+                throw new VeiculoEmUsoException(aluguel.getVeiculo().getPlaca(), aluguel.getVeiculo().getPorte().toString());
             }
         }
         return false;

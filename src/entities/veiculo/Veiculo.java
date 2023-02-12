@@ -1,6 +1,6 @@
 package entities.veiculo;
 
-import dtos.veiculo.IncluirVeiculoDTO;
+import dtos.veiculo.IncluirAlterarVeiculoDTO;
 import enums.Porte;
 
 public class Veiculo {
@@ -9,6 +9,7 @@ public class Veiculo {
 
     private Porte porte;
     private Integer taxa;
+    private boolean emUso = false;
 
     public Veiculo(String placa, Porte porte) {
         this.placa = placa;
@@ -16,10 +17,10 @@ public class Veiculo {
         validaPorte(porte);
     }
 
-    public Veiculo(IncluirVeiculoDTO incluirVeiculoDTO) {
-        this.placa = incluirVeiculoDTO.getPlaca();
-        this.porte = incluirVeiculoDTO.getPorte();
-        validaPorte(incluirVeiculoDTO.getPorte());
+    public Veiculo(IncluirAlterarVeiculoDTO incluirAlterarVeiculoDTO) {
+        this.placa = incluirAlterarVeiculoDTO.getPlaca();
+        this.porte = incluirAlterarVeiculoDTO.getPorte();
+        validaPorte(incluirAlterarVeiculoDTO.getPorte());
     }
 
     private void validaPorte(Porte porte) {
@@ -30,9 +31,12 @@ public class Veiculo {
         else if(porte == Porte.SUV)
             this.taxa = 200;
     }
+    public boolean isEmUso() {
+        return emUso;
+    }
 
-    public String getId() {
-        return placa;
+    public void setEmUso(boolean emUso) {
+        this.emUso = emUso;
     }
 
     public String getPlaca() {

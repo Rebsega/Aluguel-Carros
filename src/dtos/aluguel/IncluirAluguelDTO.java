@@ -4,6 +4,7 @@ import entities.aluguel.Aluguel;
 import entities.cliente.Cliente;
 import entities.veiculo.Veiculo;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class IncluirAluguelDTO {
@@ -11,8 +12,8 @@ public class IncluirAluguelDTO {
     private Cliente cliente;
     private Veiculo veiculo;
     private String identificador;
-    private Date dataAluguel;
-    private Date dataDevolucao;
+    private Calendar dataAluguel;
+    private Calendar dataDevolucao;
 
     public IncluirAluguelDTO(Aluguel aluguel) {
         this.cliente = aluguel.getCliente();
@@ -20,6 +21,14 @@ public class IncluirAluguelDTO {
         this.identificador = aluguel.getId();
         this.dataAluguel = aluguel.getDataAluguel();
         this.dataDevolucao = aluguel.getDataDevolucao();
+    }
+
+    public IncluirAluguelDTO(Cliente cliente, Veiculo veiculo, String identificador, Calendar dataAluguel, Calendar dataDevolucao) {
+        this.cliente = cliente;
+        this.veiculo = veiculo;
+        this.identificador = identificador;
+        this.dataAluguel = dataAluguel;
+        this.dataDevolucao = dataDevolucao;
     }
 
     public Cliente getCliente() {
@@ -46,19 +55,19 @@ public class IncluirAluguelDTO {
         this.identificador = identificador;
     }
 
-    public Date getDataAluguel() {
+    public Calendar getDataAluguel() {
         return dataAluguel;
     }
 
-    public void setDataAluguel(Date dataAluguel) {
+    public void setDataAluguel(Calendar dataAluguel) {
         this.dataAluguel = dataAluguel;
     }
 
-    public Date getDataDevolucao() {
+    public Calendar getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
+    public void setDataDevolucao(Calendar dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 }

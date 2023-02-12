@@ -1,28 +1,32 @@
 package entities.cliente;
 
-import dtos.aluguel.IncluirAluguelDTO;
-import dtos.cliente.IncluirClienteDTO;
+import dtos.cliente.IncluirAlterarClienteDTO;
 import enums.TipoPessoa;
 
 public class Cliente{
 
     private String nome;
 
-    private String id;
+    private String cpfCnpj;
 
     private TipoPessoa tipoPessoa;
 
-    public Cliente(String nome, String identificador) {
+    public Cliente (){}
+
+    public Cliente(String nome, String cpfCnpj) {
         this.nome = nome;
-        this.id = identificador;
-        validaIdentificador(identificador);
+        this.cpfCnpj = cpfCnpj;
+        validaIdentificador(cpfCnpj);
     }
 
-    public Cliente(IncluirClienteDTO incluirClienteDTO) {
+    public Cliente(IncluirAlterarClienteDTO incluirAlterarClienteDTO) {
+        this.nome = incluirAlterarClienteDTO.getNome();
+        this.cpfCnpj = incluirAlterarClienteDTO.getId();
+        validaIdentificador(cpfCnpj);
     }
 
-    public String getId() {
-        return id;
+    public String getCpfCnpj() {
+        return cpfCnpj;
     }
 
     public String getNome() {
@@ -34,7 +38,7 @@ public class Cliente{
     }
 
 
-    public void setId(String id) { this.id = id; }
+    public void setCpfCnpj(String cpfCnpj) { this.cpfCnpj = cpfCnpj; }
 
     private void validaIdentificador(String identificador) {
         if(identificador.length() == 11)

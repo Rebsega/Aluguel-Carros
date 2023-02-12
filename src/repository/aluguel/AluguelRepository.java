@@ -4,14 +4,14 @@ import dtos.aluguel.IncluirAluguelDTO;
 import entities.aluguel.Aluguel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AluguelRepository{
 
     void salvar(IncluirAluguelDTO incluirAluguelDTO);
 
-    Aluguel buscarPorId(String id);
+    Optional<Aluguel> buscarPorId(String id);
 
-    List<Aluguel> buscarPorCliente(String nomeCliente);
 
     List<Aluguel> buscarTodos();
 

@@ -1,15 +1,18 @@
 package services.veiculo;
 
-import dtos.veiculo.IncluirVeiculoDTO;
+import dtos.veiculo.IncluirAlterarVeiculoDTO;
 import entities.veiculo.Veiculo;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface VeiculoService {
 
-    void incluir(IncluirVeiculoDTO incluirVeiculoDTO);
+    void incluir(IncluirAlterarVeiculoDTO incluirAlterarVeiculoDTO);
 
-    Veiculo buscarPorId(String id);
+    Veiculo alterar(IncluirAlterarVeiculoDTO incluirAlterarVeiculoDTO, String idAnterior);
+
+    Optional<Veiculo> buscarPorPlaca(String id);
 
     List<Veiculo> buscarTodos();
 

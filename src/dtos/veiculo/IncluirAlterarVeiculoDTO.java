@@ -3,24 +3,19 @@ package dtos.veiculo;
 import entities.veiculo.Veiculo;
 import enums.Porte;
 
-public class IncluirVeiculoDTO {
-    private String id;
+public class IncluirAlterarVeiculoDTO {
 
     private String placa;
     private Porte porte;
 
-    public IncluirVeiculoDTO(Veiculo veiculo) {
-        this.id = veiculo.getId();
+    public IncluirAlterarVeiculoDTO(Veiculo veiculo) {
         this.placa = veiculo.getPlaca();
         this.porte = veiculo.getPorte();
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public IncluirAlterarVeiculoDTO(String placa, Porte porte) {
+        this.placa = placa;
+        this.porte = porte;
     }
 
     public String getPlaca() {

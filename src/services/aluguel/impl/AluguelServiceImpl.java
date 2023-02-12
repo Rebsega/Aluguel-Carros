@@ -6,6 +6,7 @@ import repository.aluguel.AluguelRepository;
 import services.aluguel.AluguelService;
 
 import java.util.List;
+import java.util.Optional;
 
 public class AluguelServiceImpl implements AluguelService {
 
@@ -20,7 +21,7 @@ public class AluguelServiceImpl implements AluguelService {
     }
 
     @Override
-    public Aluguel buscarPorId(String id) {
+    public Optional<Aluguel> buscarPorId(String id) {
         return aluguelRepository.buscarPorId(id);
     }
 
